@@ -1,27 +1,11 @@
 name: Commmits Checker
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+
+on: [pull_request]
 
 jobs:
-  check-commits:
-    runs-on: ubuntu-latest
-    steps:
+  commitlint:
+  steps:
     - uses: actions/checkout@v2
-        # You may pin to the exact commit or the version.
-        # uses: wagoid/commitlint-github-action@2d572ed5ea8b369af534fa21eea186a7eef07cda
-    - name: Run CommitLint
-      uses: wagoid/commitlint-github-action@v2.0.3
       with:
-        # Commitlint config file. If the file doesn't exist, config-conventional settings will be loaded as a fallback.
-        configFile: # optional, default is ./commitlint.config.js
-        # When set to true, we follow only the first parent commit when seeing a merge commit. More info in git-log docs https://git-scm.com/docs/git-log#Documentation/git-log.txt---first-parent
-
-        firstParent: # optional, default is true
-        # Whether you want to fail on warnings or not
-        failOnWarnings: # optional, default is false
-        # Link to a page explaining your commit message convention
-        helpURL: # optional, default is https://github.com/conventional-changelog/commitlint/#what-is-commitlint
-        # Personal access token (PAT) used to interact with the GitHub API. By default, the automatic token provided by GitHub is used. You can see more info about GitHub's default token here: https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token
-
-        token: # optional, default is ${{ github.token }}
+        fetch-depth: 0
+    - uses: wagoid/commitlint-github-action@v2
