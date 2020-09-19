@@ -1,4 +1,4 @@
- name: Commit Linter
+- name: Commit Linter
   # You may pin to the exact commit or the version.
   # uses: wagoid/commitlint-github-action@2d572ed5ea8b369af534fa21eea186a7eef07cda
   uses: wagoid/commitlint-github-action@v2.0.3
