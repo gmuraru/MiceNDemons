@@ -33,6 +33,11 @@ class Trie:
         for c in word:
             if c not in node:
                 return False
+            
+            node = node[c]
 
-        del node[None]
-        return True
+        if None in node:
+            del node[None]
+            return True
+
+        return False
