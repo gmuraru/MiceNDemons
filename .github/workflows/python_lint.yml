@@ -1,0 +1,31 @@
+name: Python Lint Black and flake8
+
+on: [ push, pull_request ]
+
+jobs:
+  lint:
+    name: Lint with Black and flake8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+      - name: Lint with Black
+        run: |
+          pip install black
+          black --check .
+      - name: If needed, commit black changes to a new pull request
+        if: failure()
+        run: |
+          black .
+          git config --global user.name github-actions
+          git config --global user.email '${GITHUBACTOR}@users.noreply.github.com'          
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUBTOKEN }}@github.com/$GITHUB_REPOSITORY
+          git commit -am "fixup! Format Python code with psf/black push"
+          git push --force origin HEAD:$GITHUB_REF
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
