@@ -13,15 +13,6 @@ jobs:
         run: |
           pip install black
           black --check .
-      - name: If needed, commit black changes to a new pull request
-        if: failure()
-        run: |
-          black .
-          git config --global user.name github-actions
-          git config --global user.email '${GITHUBACTOR}@users.noreply.github.com'          
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUBTOKEN }}@github.com/$GITHUB_REPOSITORY
-          git commit -am "fixup! Format Python code with psf/black push"
-          git push --force origin HEAD:$GITHUB_REF
       - name: Lint with flake8
         run: |
           pip install flake8
