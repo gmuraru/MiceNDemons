@@ -4,36 +4,13 @@ try:
     ll = int(input("lower limit of the function : "))
     n=4
     h=(ul-ll)/n
-    print(h)
     x=[]
     s=0
     fx=[]
-    print("enter the choice","\n","1. sqrt ", "\n", "2. sin", "\n","3. cos")
-    choice = int(input())
-
-    if(choice == 1):
-        for i in range(0,n+1):
-            inp = np.sqrt(s)
-            fx.append(inp)
-            x.append(s)
-            s=s+h
-
-    elif(choice == 2):
-        for i in range(0,n+1):
-            inp = np.sin(s)
-            fx.append(inp)
-            x.append(s)
-            s=s+h
-        
-    elif(choice == 3):
-        for i in range(0,n+1):
-            inp = np.cos(s)
-            fx.append(inp)
-            x.append(s)
-            s=s+h
-    else:
-        print("Kindly enter valid choice")
-    
+    for i in range(0,n+1):
+        fx.append(np.sqrt(s))
+        x.append(s)
+        s=s+h
     s= 0
     for i in fx:
         if(fx.index(i) ==0 or fx.index(i) == len(fx)-1):
@@ -50,4 +27,3 @@ try:
     
 except:
     print("Kindly enter valid input")
-
