@@ -1,4 +1,4 @@
-from src.trie.trie import Trie
+from ...src.trie.trie import Trie
 
 
     
